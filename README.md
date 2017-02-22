@@ -1,6 +1,6 @@
 #blog_bottle_mongo
 This is a blog application project from MongoUniversity using MongoDB3.4,
-Python 2.7 and Bottle, the one-file Python microframework.
+Python 2.7 and Bottle 0.12.13, the one-file micro web-framework for Python.
 
 Install [MongoDB](https://www.mongodb.com/download-center#community);
 
