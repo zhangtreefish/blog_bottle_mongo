@@ -13,6 +13,12 @@ start mongod instance by:
 mkdir data
 mongod --dbpath data
 ```
+
+populate 'posts' data with:
+```
+mongoimport -d blog -c posts < posts.json
+```
+
 start the blog application by:
 ```
 pip install pymongo
