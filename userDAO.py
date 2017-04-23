@@ -46,7 +46,7 @@ class UserDAO:
     def make_pw_hash(self, pw,salt=None):
         if salt == None:
             salt = self.make_salt();
-        return hashlib.sha256(pw + salt).hexdigest()+","+ salt
+        return hashlib.sha256((pw + salt).encode('utf-8')).hexdigest()+","+ salt
 
     # Validates a user login. Returns user record or None
     def validate_login(self, username, password):
@@ -55,16 +55,16 @@ class UserDAO:
         try:
             user = self.users.find_one({'_id': username})
         except:
-            print "Unable to query database for user"
+            print("Unable to query database for user")
 
         if user is None:
-            print "User not in database"
+            print("User not in database")
             return None
 
         salt = user['password'].split(',')[1]
 
         if user['password'] != self.make_pw_hash(password, salt):
-            print "user password is not a match"
+            print("user password is not a match")
             return None
 
         # Looks good
@@ -82,10 +82,10 @@ class UserDAO:
         try:
             self.users.insert_one(user)
         except pymongo.errors.OperationFailure:
-            print "oops, mongo error"
+            print("oops, mongo error")
             return False
         except pymongo.errors.DuplicateKeyError as e:
-            print "oops, username is already taken"
+            print("oops, username is already taken")
             return False
 
         return True
